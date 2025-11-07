@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Resmi Perumahan Harmoni - Galeri Kegiatan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        /* Gaya Kustom (Konsistensi Tema) */
+        :root {
+            --bs-primary: #1a2a4b;   /* Navy gelap */
+            --bs-secondary: #00bcd4; /* Teal / Biru muda */
+            --bs-font-sans-serif: 'Poppins', sans-serif;
+            --bs-gradient: linear-gradient(135deg, var(--bs-primary), #3a4a6b);
+        }
+
+        body {
+            font-family: var(--bs-font-sans-serif);
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Kustom */
+        .navbar-custom {
+            background-color: var(--bs-primary);
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+            padding: 10px 15px !important;
+            margin: 0 5px;
+        }
+        .nav-link:hover, .nav-item .active {
+            color: var(--bs-secondary) !important;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        /* --- Judul Halaman Galeri --- */
+        .page-title {
+            color: var(--bs-primary);
+            font-weight: 800;
+            font-size: 3.5rem; /* Lebih besar */
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background-color: var(--bs-secondary);
+            border-radius: 3px;
+        }
+        .section-header {
+            margin-bottom: 5rem; /* Margin besar di bawah header */
+        }
+        
+        /* Filter Kategori */
+        .badge-category {
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            padding: 8px 15px;
+            margin: 0 5px;
+        }
+        .badge-category:hover, .badge-category.active {
+            transform: translateY(-2px);
+            opacity: 0.9;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Kartu Galeri Kustom --- */
+        .gallery-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Bayangan lebih halus */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            cursor: pointer; /* Menandakan bisa diklik */
+        }
+        .gallery-card:hover {
+            transform: scale(1.02); /* Efek hover lebih terasa */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 320px; /* Tinggi foto yang seragam dan lebih besar */
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        /* Overlay Keterangan */
+        .caption-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 15px; /* Padding lebih besar */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+            color: white;
+            z-index: 2;
+        }
+        
+        .caption-overlay h5 {
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .caption-overlay small {
+            color: var(--bs-secondary);
+            font-weight: 500;
+        }
+        
+        /* Modal Kustom */
+        .modal-content {
+            background-color: transparent;
+            border: none;
+        }
+        .modal-body {
+            padding: 0;
+            text-align: center;
+        }
+        .modal-body img {
+            max-height: 90vh;
+            width: auto;
+            max-width: 90vw;
+            border-radius: 10px;
+        }
+        .btn-close-white {
+            filter: invert(1);
+            opacity: 1;
+            box-shadow: none;
+        }
+        .modal-header {
+            border-bottom: none;
+            padding: 0.5rem 0.5rem 0 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="index.html">🏠 Harmoni <span class="text-secondary">RW 05</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html"><i class="bi bi-house-door-fill"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-images"></i> **Galeri Kegiatan**</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html#informasi-lengkap"><i class="bi bi-info-circle-fill"></i> Info Lengkap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html#kontak-darurat"><i class="bi bi-shield-fill"></i> Darurat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5 pt-4">
+        
+        <header class="text-center section-header">
+            <h1 class="page-title text-primary-custom">📸 Galeri Kegiatan Warga Harmoni</h1>
+            <p class="lead text-muted">Jelajahi momen kebersamaan, gotong royong, dan kegiatan positif di lingkungan RW 05.</p>
+        </header>
+
+        <div class="text-center mb-5">
+            <button class="badge bg-primary me-2 badge-category active" data-filter="all"><i class="bi bi-star-fill"></i> Semua</button>
+            <button class="badge bg-secondary me-2 badge-category" data-filter="gotongroyong"><i class="bi bi-tools"></i> Gotong Royong</button>
+            <button class="badge bg-success me-2 badge-category" data-filter="olahraga"><i class="bi bi-bicycle"></i> Olah Raga</button>
+            <button class="badge bg-warning text-dark me-2 badge-category" data-filter="perayaan"><i class="bi bi-gift-fill"></i> Perayaan Hari Besar</button>
+            <button class="badge bg-info text-dark me-2 badge-category" data-filter="sosial"><i class="bi bi-heart-fill"></i> Sosial & Kesehatan</button>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="gallery-container">
+            
+            <div class="col gallery-item gotongroyong">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Gotong+Royong+Massal" data-title="Kerja Bakti Pembersihan Saluran">
+                    <img src="https://via.placeholder.com/600x400?text=Gotong+Royong+Massal" alt="Gotong Royong" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>25 Agustus 2024</small>
+                        <h5 class="m-0">Kerja Bakti Pembersihan Saluran</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col gallery-item olahraga">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Turnamen+Badminton" data-title="Final Turnamen Hari Kemerdekaan">
+                    <img src="https://via.placeholder.com/600x400?text=Turnamen+Badminton" alt="Badminton" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>17 Agustus 2024</small>
+                        <h5 class="m-0">Final Turnamen Hari Kemerdekaan</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col gallery-item perayaan">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Perayaan+Idul+Adha" data-title="Penyembelihan Hewan Qurban">
+                    <img src="https://via.placeholder.com/600x400?text=Perayaan+Idul+Adha" alt="Idul Adha" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>15 Juni 2024</small>
+                        <h5 class="m-0">Penyembelihan Hewan Qurban</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col gallery-item sosial">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Kegiatan+Posyandu" data-title="Kegiatan Rutin Posyandu Balita">
+                    <img src="https://via.placeholder.com/600x400?text=Kegiatan+Posyandu" alt="Posyandu" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>10 Mei 2024</small>
+                        <h5 class="m-0">Kegiatan Rutin Posyandu Balita</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col gallery-item gotongroyong">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Penanaman+Pohon" data-title="Aksi Penanaman Pohon Bersama">
+                    <img src="https://via.placeholder.com/600x400?text=Penanaman+Pohon" alt="Penanaman Pohon" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>02 April 2024</small>
+                        <h5 class="m-0">Aksi Penanaman Pohon Bersama</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col gallery-item olahraga">
+                <div class="gallery-card shadow-sm" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="https://via.placeholder.com/1200x800?text=Senam+Pagi+Warga" data-title="Senam Sehat Mingguan di Lapangan">
+                    <img src="https://via.placeholder.com/600x400?text=Senam+Pagi+Warga" alt="Senam" class="img-fluid">
+                    <div class="caption-overlay">
+                        <small>03 Maret 2024</small>
+                        <h5 class="m-0">Senam Sehat Mingguan di Lapangan</h5>
+                    </div>
+                </div>
+            </div>
+            
+        </div> </div> <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-white" id="imageModalLabel">Judul Foto</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img id="modalImage" src="" alt="Foto Kegiatan" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="py-4 mt-5" style="background: var(--bs-gradient);">
+        <div class="container text-center">
+            <p class="m-0 text-white fw-light">&copy; 2025 Portal Resmi Perumahan Harmoni. Dikelola oleh Pengurus RW 05.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // === JS untuk Fitur Lightbox (Modal) ===
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageModal = document.getElementById('imageModal');
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                // Tombol/Card yang memicu modal
+                const button = event.relatedTarget; 
+                
+                // Ambil data dari atribut data-*
+                const imageUrl = button.getAttribute('data-src');
+                const imageTitle = button.getAttribute('data-title');
+                
+                // Update konten modal
+                const modalImage = imageModal.querySelector('#modalImage');
+                const modalTitle = imageModal.querySelector('#imageModalLabel');
+                
+                modalImage.src = imageUrl;
+                modalTitle.textContent = imageTitle;
+            });
+
+            // === JS untuk Fitur Filter Kategori ===
+            const filterButtons = document.querySelectorAll('.badge-category');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Hapus kelas 'active' dari semua tombol
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan kelas 'active' ke tombol yang diklik
+                    this.classList.add('active');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        // Tampilkan semua jika filter 'all'
+                        if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                            item.style.display = 'block';
+                            // Tambahkan sedikit animasi fade-in
+                            item.style.opacity = '0';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                            }, 50);
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
